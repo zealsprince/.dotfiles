@@ -1,4 +1,8 @@
-#!/bin/bash
-# Requires https://github.com/jorgebastida/awslogs
+#!/usr/bin/env bash
+# Stream Lambda logs using AWS CLI v2 (no awslogs dependency).
+# Usage:
+#   lambda-logs            # tails /aws/lambda/$PWD
+#   lambda-logs my-func    # tails /aws/lambda/my-func
 
-awslogs get /aws/lambda/${PWD##*/} --start="10m ago" --no-group --no-stream --timestamp --watch
+fn="${1:-${PWD##*/}}"
+aws logs tail "/aws/lambda/${fn}" --since 10m --follow

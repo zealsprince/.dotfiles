@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DODOFILE=$HOME/.dodofile
 
 add () {
     touch $DODOFILE
     __data=$(<$DODOFILE)
-   
+
     if [[ -z "$*" ]]; then
         echo "Enter a new do:"
 
@@ -22,13 +22,13 @@ remove () {
     touch $DODOFILE
     __data=$(<$DODOFILE)
     __selection=${__data//$'\n'/\" \"}
-    
+
     if [ -s $DODOFILE ]; then
         eval set "\"$__selection\""
         select __entry in "$@"; do
             __chain=""$REPLY"d w q"
             printf '%s\n' $__chain | ed -s $DODOFILE
-        
+
             echo "Removed '$__entry'."
 
             break;
@@ -50,7 +50,7 @@ count () {
 show () {
     touch $DODOFILE
     __data=$(<$DODOFILE)
-   
+
     if [ -s $DODOFILE ]; then
         echo "$__data" | nl -n ln -s ") " -w 1
     else
@@ -88,7 +88,7 @@ EOF
 main () {
     __command=$1
     __value=${*//$__command/}
-    
+
     case "$__command" in
         "help"      ) help ;;
         "add"       ) add $__value ;;
