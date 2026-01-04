@@ -224,16 +224,15 @@ if [[ -d $HOME/.bash-my-aws ]]; then
     source $HOME/.bash-my-aws/aliases
 fi
 
-
 # Preferred editor for local sessions.
 if exists vim; then
     export EDITOR='vim'
 fi
 
-# Replace default ls commands with exa's.
-if exists exa; then
-    alias ls="exa --icons"
-    alias la="exa -laagh --git --icons"
+# Replace default ls commands with eza's.
+if exists eza; then
+    alias ls="eza --icons"
+    alias la="eza -laagh --git --icons"
 fi
 
 # Create an extra alias just for pasting. Uses netcat if available.
