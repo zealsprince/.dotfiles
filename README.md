@@ -2,11 +2,11 @@
 
 This repository contains my **dotfiles** (CLI-focused configuration) such as:
 
-- `zsh/` — Zsh configuration (`.zshrc`, `p10k`, themes, plugins/scripts, dircolors)
-- `tmux/` — tmux configuration (`.tmux.conf`)
-- `vim/` — vim configuration (`.vimrc` + related assets)
-- `bin/` — personal scripts intended to be on `$PATH`
-- `base16-shell/` — theme assets + setup helper
+- `zsh/` - Zsh configuration (`.zshrc`, `p10k`, themes, plugins/scripts, dircolors)
+- `tmux/` - tmux configuration (`.tmux.conf`)
+- `vim/` - vim configuration (`.vimrc` + related assets)
+- `bin/` - personal scripts intended to be on `$PATH`
+- `base16-shell/` - theme assets + setup helper
 
 ## Setup entrypoints
 
@@ -18,11 +18,11 @@ Each component can provide a `setup.sh` so there’s a consistent entrypoint whe
   - `DRY_RUN=1 ./setup.sh …`
 
 Component scripts (examples):
-- `zsh/setup.sh` — optional Oh My Zsh + plugin install, optional dotfile linking
-- `vim/setup.sh` — installs vim-plug and links `~/.vimrc`
-- `tmux/setup.sh` — installs TPM and links `~/.tmux.conf`
-- `bin/setup.sh` — installs scripts into `~/.local/bin` (symlink or copy)
-- `base16-shell/setup.sh` — installs base16-shell and theme assets
+- `zsh/setup.sh` - optional Oh My Zsh + plugin install, optional dotfile linking
+- `vim/setup.sh` - installs vim-plug and links `~/.vimrc`
+- `tmux/setup.sh` - installs TPM and links `~/.tmux.conf`
+- `bin/setup.sh` - installs scripts into `~/.local/bin` (symlink or copy)
+- `base16-shell/setup.sh` - installs base16-shell and theme assets
 
 ## How I apply these (Nix/Home Manager)
 
