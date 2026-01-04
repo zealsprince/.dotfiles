@@ -40,8 +40,18 @@ if [ "$TERM_PROGRAM" = "vscode" ]; then
     return
 fi
 
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+# Prefer Nix-provided theme/plugin entrypoints (exported by Home Manager) when available.
+# Fall back to a classic Oh My Zsh checkout only if it exists.
+#
+# Exported by HM (see `.nixos/modules/home/base.nix`):
+#   - $ZDOTFILES_ZSH_P10K_THEME
+#   - $ZDOTFILES_ZSH_AUTOSUGGESTIONS
+#   - $ZDOTFILES_ZSH_SYNTAX_HIGHLIGHTING
+#
+# We'll only set $ZSH to ~/.oh-my-zsh if it actually exists.
+if [[ -d "$HOME/.oh-my-zsh" ]]; then
+    export ZSH="$HOME/.oh-my-zsh"
+fi
 
 # Base16 Shell support. Install via: git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
 # Don't forget to set your theme via base16 and tab completion. I personally use base16_neko which is a fork of base16_seti.
@@ -73,7 +83,7 @@ if [[ -a $HOME/.zsh_op ]]; then
         eval $(op signin --account $OP_ACCOUNT)
         op item get $OP_ITEM --fields $OP_FIELD --reveal | /usr/lib/gnupg/gpg-preset-passphrase --preset $OP_GPG_KEYGRIP
     }
-    
+
     gpg_cache
 fi
 
@@ -86,10 +96,19 @@ fi
 
 # typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-#Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# Load Powerlevel10k theme.
+#
+# - On Nix/Home Manager: source the theme directly from the Nix store via
+#   $ZDOTFILES_ZSH_P10K_THEME (preferred).
+# - Otherwise: fall back to Oh My Zsh theme selection if OMZ is installed.
+if [[ -n "${ZDOTFILES_ZSH_P10K_THEME:-}" && -r "$ZDOTFILES_ZSH_P10K_THEME" ]]; then
+    source "$ZDOTFILES_ZSH_P10K_THEME"
+elif [[ -n "${ZSH:-}" && -r "$ZSH/oh-my-zsh.sh" ]]; then
+    # Set name of the theme to load. Optionally, if you set this to "random"
+    # it'll load a random theme each time that oh-my-zsh is loaded.
+    # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -144,7 +163,7 @@ plugins=(
     ansible docker kubectl
     python pyenv pip pipenv virtualenv
     ruby rails rake gem
-    rust 
+    rust
     golang
     node npm yarn nvm
     archlinux systemd
@@ -154,8 +173,20 @@ plugins=(
 
 # To install the plugins from my custom setup simply "source plugins.sh".
 
-# Source the base oh-my-zsh script.
-source $ZSH/oh-my-zsh.sh
+# Source Oh My Zsh only if installed (Nix setups may not have ~/.oh-my-zsh).
+if [[ -n "${ZSH:-}" && -r "$ZSH/oh-my-zsh.sh" ]]; then
+    source "$ZSH/oh-my-zsh.sh"
+fi
+
+# Nix/Home Manager path-based plugins (preferred when available).
+# These are safe to source even if OMZ isn't installed.
+if [[ -n "${ZDOTFILES_ZSH_AUTOSUGGESTIONS:-}" && -r "$ZDOTFILES_ZSH_AUTOSUGGESTIONS" ]]; then
+    source "$ZDOTFILES_ZSH_AUTOSUGGESTIONS"
+fi
+
+if [[ -n "${ZDOTFILES_ZSH_SYNTAX_HIGHLIGHTING:-}" && -r "$ZDOTFILES_ZSH_SYNTAX_HIGHLIGHTING" ]]; then
+    source "$ZDOTFILES_ZSH_SYNTAX_HIGHLIGHTING"
+fi
 
 # Configure zsh_codex keybind
 bindkey '^X' create_completion
@@ -209,7 +240,7 @@ fi
 # Example: echo You can now paste like this! | tb
 if exists nc; then
     alias tb="nc termbin.com 9999"
-    
+
 else
     alias tb="(exec 3<>/dev/tcp/termbin.com/9999; cat >&3; cat <&3; exec 3<&-)"
 
@@ -239,7 +270,7 @@ export PATH=$HOME/.local/bin:$PATH
 if exists dodo; then
     __todo_pick="$(dodo pick)"
     __todo_count="$(dodo count)"
-    
+
     if [[ ! -s $__todo_pick ]]; then
         echo "TO ($__todo_count) DO: $__todo_pick"
     fi
