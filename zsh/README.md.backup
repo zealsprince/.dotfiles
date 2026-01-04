@@ -1,0 +1,53 @@
+
+# zsh Configuration #
+
+The main zsh configuration I use on all systems I run and manage.
+
+## Installation ##
+
+### Quick start (recommended)
+
+Use the provided setup script:
+
+- Preview what it will do:
+
+  `./setup.sh --all`
+
+- Apply changes:
+
+  `./setup.sh --all --apply`
+
+Notes:
+- On systems where dotfiles are deployed via another tool (e.g. Home Manager), you may not want `--install-dotfiles`. In that case, use:
+  `./setup.sh --install-omz --install-plugins --apply`
+
+### Manual install
+
+Before doing anything else: Make sure you have *zsh* and *oh-my-zsh* installed.
+You should be able to download zsh through your system's package manager. For
+the installation of *oh-my-zsh*, head over to the
+[official GitHub repository](https://github.com/ohmyzsh/ohmyzsh) or
+check the *.zshrc* file for additional instructions on the command line.
+
+Override your *.zshrc* file with the one in this repository.
+
+To install plugins used by this setup, you can either:
+- run `./setup.sh --install-plugins --apply`, or
+- review and run `plugins.sh` manually (it clones plugin repos into Oh My Zsh’s custom directories).
+
+Additionally for my powerlevel10k settings; copy the `.p10k.zsh` file to your
+home directory (or let `./setup.sh --install-dotfiles --apply` link it).
+
+## Troubleshooting ##
+
+In some rare cases you might receive the following message after starting zsh.
+
+    compdef: unknown command or service: [application name]
+
+If this error applies to you, make sure that the application/command/service
+is installed on your system. With that said, if the error still occurs run
+the following command to possibly fix it.
+
+    $ rm -f ~/.zcompdump*; compinit
+
+This will reset zsh's command completion configuration and re-initilize it.

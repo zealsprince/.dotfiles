@@ -1,0 +1,1 @@
+/nix/store/cc3d3khcmdnnnasvb46z1ap0nlzwjbga-home-manager-files/.dotfiles/zsh/README.md
