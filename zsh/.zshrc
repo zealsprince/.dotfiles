@@ -266,11 +266,22 @@ bindkey '^[^?' zsh_gh_copilot_explain  # bind Ctrl+Alt+? to explain
 export PATH=$HOME/.local/bin:$PATH
 
 # Check if the dodo .dotfile exists. If so, get todos.
-if exists dodo; then
-    __todo_pick="$(dodo pick)"
-    __todo_count="$(dodo count)"
+function dodo_check() {
+    if exists dodo; then
+        __todo_count="$(dodo count)"
 
-    if [[ ! -s $__todo_pick ]]; then
-        echo "TO ($__todo_count) DO: $__todo_pick"
+        if [[ $__todo_count =~ ^[0-9]+$ && $__todo_count -gt 0 ]]; then
+            __todo_pick="$(dodo pick | command head -n1 | command xargs)"
+
+            if [[ -n "$__todo_pick" ]]; then
+                echo "TO ($__todo_count) DO: $__todo_pick"
+            fi
+        fi
     fi
-fi
+
+    # Unregister the hook so it only runs once
+    add-zsh-hook -d precmd dodo_check
+}
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd dodo_check
