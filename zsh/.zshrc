@@ -35,6 +35,11 @@ if exists anyenv; then
     eval "$(anyenv init -)"
 fi
 
+# direnv (incl. nix-direnv): per-directory env loading
+if exists direnv; then
+  eval "$(direnv hook zsh)"
+fi
+
 # If you're working with Copilot or something else, you might want to just use vanilla zsh.
 if [ "$TERM_PROGRAM" = "vscode" ]; then
     return
