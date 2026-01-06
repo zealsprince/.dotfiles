@@ -66,8 +66,10 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale'
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+if has("python3")
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
+endif
 
 " Languages
 Plug 'rust-lang/rust.vim'
