@@ -193,12 +193,22 @@ if [[ -n "${ZDOTFILES_ZSH_SYNTAX_HIGHLIGHTING:-}" && -r "$ZDOTFILES_ZSH_SYNTAX_H
     source "$ZDOTFILES_ZSH_SYNTAX_HIGHLIGHTING"
 fi
 
-if [[ -n "${ZDOTFILES_ZSH_CODEX:-}" && -r "$ZDOTFILES_ZSH_CODEX" ]]; then
-    source "$ZDOTFILES_ZSH_CODEX"
+if [[ -n "${ZDOTFILES_ZSH_CODEX:-}" ]]; then
+    if [[ -d "$ZDOTFILES_ZSH_CODEX" ]]; then
+        for f in zsh_codex.plugin.zsh zsh_codex.zsh; do
+            if [[ -r "$ZDOTFILES_ZSH_CODEX/$f" ]]; then
+                source "$ZDOTFILES_ZSH_CODEX/$f"
+                # Configure zsh_codex keybind
+                bindkey '^X' create_completion
+                break
+            fi
+        done
+    elif [[ -r "$ZDOTFILES_ZSH_CODEX" ]]; then
+        source "$ZDOTFILES_ZSH_CODEX"
+        # Configure zsh_codex keybind
+        bindkey '^X' create_completion
+    fi
 fi
-
-# Configure zsh_codex keybind
-bindkey '^X' create_completion
 
 # Colored completion - use LS_COLORS.
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
