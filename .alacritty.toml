@@ -1,0 +1,84 @@
+# General settings
+[general]
+live_config_reload = true
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+# Startup dimensions (0 = let window manager decide)
+dimensions = { columns = 0, lines = 0 }
+
+# Window padding (in pixels)
+padding = { x = 10, y = 10 }
+dynamic_padding = true
+
+# Background opacity (0.0 - 1.0)
+opacity = 0.5
+
+# Window title
+title = "Alacritty"
+dynamic_title = true
+
+blur = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+size = 9.0
+builtin_box_drawing = true
+
+# Using DejaVu Sans Mono as a safe default based on your system config
+[font.normal]
+family = "DejaVu Sans Mono"
+style = "Regular"
+
+[font.bold]
+family = "DejaVu Sans Mono"
+style = "Bold"
+
+[font.italic]
+family = "DejaVu Sans Mono"
+style = "Italic"
+
+[font.bold_italic]
+family = "DejaVu Sans Mono"
+style = "Bold Italic"
+
+# Tokyo Night Theme
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+background = "#1a1b26"
+foreground = "#c0caf5"
+
+[colors.normal]
+black   = "#15161e"
+red     = "#f7768e"
+green   = "#9ece6a"
+yellow  = "#e0af68"
+blue    = "#7aa2f7"
+magenta = "#bb9af7"
+cyan    = "#7dcfff"
+white   = "#a9b1d6"
+
+[colors.bright]
+black   = "#414868"
+red     = "#f7768e"
+green   = "#9ece6a"
+yellow  = "#e0af68"
+blue    = "#7aa2f7"
+magenta = "#bb9af7"
+cyan    = "#7dcfff"
+white   = "#c0caf5"
+
+[cursor]
+style = { shape = "Block", blinking = "On" }
+blink_interval = 750
+unfocused_hollow = true
+
+[selection]
+save_to_clipboard = true
