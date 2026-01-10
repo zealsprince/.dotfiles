@@ -193,6 +193,10 @@ if [[ -n "${ZDOTFILES_ZSH_SYNTAX_HIGHLIGHTING:-}" && -r "$ZDOTFILES_ZSH_SYNTAX_H
     source "$ZDOTFILES_ZSH_SYNTAX_HIGHLIGHTING"
 fi
 
+if [[ -n "${ZDOTFILES_ZSH_CODEX:-}" && -r "$ZDOTFILES_ZSH_CODEX" ]]; then
+    source "$ZDOTFILES_ZSH_CODEX"
+fi
+
 # Configure zsh_codex keybind
 bindkey '^X' create_completion
 
