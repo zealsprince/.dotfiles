@@ -82,3 +82,13 @@ unfocused_hollow = true
 
 [selection]
 save_to_clipboard = true
+
+[keyboard]
+
+bindings = [
+  # Ctrl+Left  -> Esc b (backward-word)
+  { key = "Left",  mods = "Control", chars = "\u001bb" },
+
+  # Ctrl+Right -> Esc f (forward-word)
+  { key = "Right", mods = "Control", chars = "\u001bf" },
+]
