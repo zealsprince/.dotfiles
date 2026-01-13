@@ -250,8 +250,8 @@ fi
 
 # Replace default ls commands with eza's.
 if exists eza; then
-    alias ls="eza --icons"
-    alias la="eza -laagh --git --icons"
+    alias ls="eza --icons=always"
+    alias la="eza -laagh --icons=always --git "
 fi
 
 # Create an extra alias just for pasting. Uses netcat if available.
