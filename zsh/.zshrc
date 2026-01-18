@@ -278,6 +278,14 @@ fi
 bindkey "[C" forward-word
 bindkey "[D" backward-word
 
+# Use terminfo keys for history search (up/down matching prefix)
+typeset -g -A key
+key[Up]="${terminfo[kcuu1]}"
+key[Down]="${terminfo[kcud1]}"
+
+[[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" up-line-or-search
+[[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" down-line-or-search
+
 # GitHub Copilot keybindings.
 bindkey '^[?' zsh_gh_copilot_suggest  # bind Alt+? to suggest
 bindkey '^[^?' zsh_gh_copilot_explain  # bind Ctrl+Alt+? to explain
