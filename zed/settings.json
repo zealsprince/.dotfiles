@@ -1,0 +1,70 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "outline_panel": {
+    "dock": "left",
+  },
+  "project_panel": {
+    "hide_hidden": false,
+    "hide_root": true,
+    "entry_spacing": "standard",
+  },
+  "terminal": {
+    "dock": "bottom",
+    "toolbar": {
+      "breadcrumbs": false,
+    },
+  },
+  "redact_private_values": true,
+  "tabs": {
+    "file_icons": true,
+    "git_status": false,
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_branch_icon": true,
+  },
+  "debugger": {
+    "dock": "right",
+  },
+  "colorize_brackets": true,
+  "indent_guides": {
+    "coloring": "fixed",
+  },
+  "features": {
+    "edit_prediction_provider": "copilot",
+  },
+  "minimap": {
+    "max_width_columns": 80,
+    "thumb_border": "full",
+    "thumb": "always",
+    "show": "always",
+  },
+  "agent_buffer_font_size": 11.0,
+  "agent_ui_font_size": 13.0,
+  "buffer_font_weight": 400.0,
+  "git_panel": {
+    "dock": "right",
+  },
+  "icon_theme": "Material Icon Theme",
+  "agent": {
+    "always_allow_tool_actions": true,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gemini-3-pro-preview",
+    },
+    "model_parameters": [],
+  },
+  "ui_font_size": 15.0,
+  "buffer_font_size": 11.0,
+  "theme": {
+    "dark": "Neko (Dark)",
+    "light": "Ayu Light",
+  },
+}
