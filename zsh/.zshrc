@@ -277,6 +277,8 @@ fi
 # Custom key bindings go in this section.
 bindkey "[C" forward-word
 bindkey "[D" backward-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 # Use terminfo keys for history search (up/down matching prefix)
 typeset -g -A key
