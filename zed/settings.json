@@ -7,6 +7,9 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "edit_predictions": {
+    "provider": "copilot",
+  },
   "outline_panel": {
     "dock": "left",
   },
@@ -37,9 +40,6 @@
   "indent_guides": {
     "coloring": "fixed",
   },
-  "features": {
-    "edit_prediction_provider": "copilot",
-  },
   "minimap": {
     "max_width_columns": 80,
     "thumb_border": "full",
@@ -54,10 +54,20 @@
   },
   "icon_theme": "Material Icon Theme",
   "agent": {
+    "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "gemini-3-pro-preview",
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "gpt-5.2-codex",
+      },
+    ],
     "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gemini-3-pro-preview",
+      "model": "gpt-5.2-codex",
     },
     "model_parameters": [],
   },
