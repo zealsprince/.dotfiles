@@ -290,8 +290,10 @@ typeset -g -A key
 key[Up]="${terminfo[kcuu1]}"
 key[Down]="${terminfo[kcud1]}"
 
-[[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" up-line-or-search
-[[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" down-line-or-search
+if ! exists atuin; then
+    [[ -n "${key[Up]}" ]] && bindkey "${key[Up]}" up-line-or-search
+    [[ -n "${key[Down]}" ]] && bindkey "${key[Down]}" down-line-or-search
+fi
 
 # GitHub Copilot keybindings.
 bindkey '^[?' zsh_gh_copilot_suggest  # bind Alt+? to suggest
