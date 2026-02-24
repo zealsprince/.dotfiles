@@ -40,6 +40,11 @@ if exists direnv; then
   eval "$(direnv hook zsh)"
 fi
 
+# Atuin: improved shell history (Nix/Home Manager install)
+if exists atuin; then
+  eval "$(atuin init zsh)"
+fi
+
 # If you're working with Copilot or something else, you might want to just use vanilla zsh.
 if [ "$TERM_PROGRAM" = "vscode" ]; then
     return
