@@ -54,7 +54,18 @@
   },
   "icon_theme": "Material Icon Theme",
   "agent": {
+    "tool_permissions": {
+      "default": "allow",
+    },
     "favorite_models": [
+      {
+        "provider": "copilot_chat",
+        "model": "claude-sonnet-4.6",
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "claude-opus-4.6",
+      },
       {
         "provider": "copilot_chat",
         "model": "gemini-3-pro-preview",
@@ -64,10 +75,9 @@
         "model": "gpt-5.2-codex",
       },
     ],
-    "always_allow_tool_actions": true,
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5.2-codex",
+      "model": "claude-sonnet-4.6",
     },
     "model_parameters": [],
   },
