@@ -323,3 +323,8 @@ add-zsh-hook precmd dodo_check
 if exists atuin; then
   eval "$(atuin init zsh)"
 fi
+
+# zoxide: smarter cd. Replaces cd with z when available.
+if exists zoxide; then
+  eval "$(zoxide init zsh --cmd cd)"
+fi
