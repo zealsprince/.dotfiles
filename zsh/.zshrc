@@ -89,8 +89,12 @@ if [[ -a $HOME/.zsh_op ]]; then
         echo "Initializing GPG key from 1Password..."
         eval $(op signin --account $OP_ACCOUNT)
 
-        # Use Nix-exported path if available, fall back to common distro path.
-        local preset_bin="${GPG_PRESET_PASSPHRASE:-/usr/lib/gnupg/gpg-preset-passphrase}"
+        # Resolve gpg-preset-passphrase dynamically: works on NixOS (store paths),
+        # distros (/usr/lib/gnupg), and anywhere gpgconf knows the libexecdir.
+        local gpg_libexec
+        gpg_libexec=$(gpgconf --list-dirs libexecdir 2>/dev/null)
+        local preset_bin="${gpg_libexec:+${gpg_libexec}/gpg-preset-passphrase}"
+        preset_bin="${preset_bin:-${GPG_PRESET_PASSPHRASE:-/usr/lib/gnupg/gpg-preset-passphrase}}"
         op item get $OP_ITEM --fields $OP_FIELD --reveal | "$preset_bin" --preset $OP_GPG_KEYGRIP
     }
 
