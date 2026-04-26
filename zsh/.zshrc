@@ -88,7 +88,10 @@ if [[ -a $HOME/.zsh_op ]]; then
         # 3. If not cached, perform the 1Password fetch (The slow part)
         echo "Initializing GPG key from 1Password..."
         eval $(op signin --account $OP_ACCOUNT)
-        op item get $OP_ITEM --fields $OP_FIELD --reveal | /usr/lib/gnupg/gpg-preset-passphrase --preset $OP_GPG_KEYGRIP
+
+        # Use Nix-exported path if available, fall back to common distro path.
+        local preset_bin="${GPG_PRESET_PASSPHRASE:-/usr/lib/gnupg/gpg-preset-passphrase}"
+        op item get $OP_ITEM --fields $OP_FIELD --reveal | "$preset_bin" --preset $OP_GPG_KEYGRIP
     }
 
     gpg_cache
