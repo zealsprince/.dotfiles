@@ -85,9 +85,10 @@ if [[ -a $HOME/.zsh_op ]]; then
             return 0
         fi
 
-        # 3. If not cached, perform the 1Password fetch (The slow part)
+        # 3. If not cached, fetch from 1Password via the desktop app integration.
+        # The CLI delegates auth to the unlocked desktop app — no prompt spawned.
+        # If the app is locked this will fail loudly rather than hang waiting for input.
         echo "Initializing GPG key from 1Password..."
-        eval $(op signin --account $OP_ACCOUNT)
 
         # Resolve gpg-preset-passphrase dynamically: works on NixOS (store paths),
         # distros (/usr/lib/gnupg), and anywhere gpgconf knows the libexecdir.
@@ -95,7 +96,11 @@ if [[ -a $HOME/.zsh_op ]]; then
         gpg_libexec=$(gpgconf --list-dirs libexecdir 2>/dev/null)
         local preset_bin="${gpg_libexec:+${gpg_libexec}/gpg-preset-passphrase}"
         preset_bin="${preset_bin:-${GPG_PRESET_PASSPHRASE:-/usr/lib/gnupg/gpg-preset-passphrase}}"
-        op item get $OP_ITEM --fields $OP_FIELD --reveal | "$preset_bin" --preset $OP_GPG_KEYGRIP
+
+        local op_args=(item get "$OP_ITEM" --fields "$OP_FIELD" --reveal)
+        [[ -n "${OP_ACCOUNT:-}" ]] && op_args+=(--account "$OP_ACCOUNT")
+
+        op "${op_args[@]}" | "$preset_bin" --preset "$OP_GPG_KEYGRIP"
     }
 
     gpg_cache
