@@ -14,6 +14,7 @@
     "dock": "left",
   },
   "project_panel": {
+    "dock": "left",
     "hide_hidden": false,
     "hide_root": true,
     "entry_spacing": "standard",
@@ -30,8 +31,8 @@
     "git_status": false,
   },
   "title_bar": {
+    "show_branch_status_icon": true,
     "show_menus": false,
-    "show_branch_icon": true,
   },
   "debugger": {
     "dock": "right",
@@ -54,6 +55,8 @@
   },
   "icon_theme": "Material Icon Theme",
   "agent": {
+    "dock": "right",
+    "sidebar_side": "right",
     "tool_permissions": {
       "default": "allow",
     },
@@ -61,18 +64,18 @@
       {
         "provider": "copilot_chat",
         "model": "claude-sonnet-4.6",
-      },
-      {
-        "provider": "copilot_chat",
-        "model": "claude-opus-4.6",
-      },
-      {
-        "provider": "copilot_chat",
-        "model": "gemini-3-pro-preview",
+        "enable_thinking": false,
       },
       {
         "provider": "copilot_chat",
         "model": "gpt-5.2-codex",
+        "enable_thinking": false,
+      },
+      {
+        "provider": "copilot_chat",
+        "model": "gemini-3.1-pro-preview",
+        "enable_thinking": true,
+        "effort": "high",
       },
     ],
     "default_model": {
