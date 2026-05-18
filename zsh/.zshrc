@@ -85,10 +85,22 @@ if [[ -a $HOME/.zsh_op ]]; then
             return 0
         fi
 
-        # 3. If not cached, perform the 1Password fetch (The slow part)
+        # 3. If not cached, fetch from 1Password via the desktop app integration.
+        # The CLI delegates auth to the unlocked desktop app — no prompt spawned.
+        # If the app is locked this will fail loudly rather than hang waiting for input.
         echo "Initializing GPG key from 1Password..."
-        eval $(op signin --account $OP_ACCOUNT)
-        op item get $OP_ITEM --fields $OP_FIELD --reveal | /usr/lib/gnupg/gpg-preset-passphrase --preset $OP_GPG_KEYGRIP
+
+        # Resolve gpg-preset-passphrase dynamically: works on NixOS (store paths),
+        # distros (/usr/lib/gnupg), and anywhere gpgconf knows the libexecdir.
+        local gpg_libexec
+        gpg_libexec=$(gpgconf --list-dirs libexecdir 2>/dev/null)
+        local preset_bin="${gpg_libexec:+${gpg_libexec}/gpg-preset-passphrase}"
+        preset_bin="${preset_bin:-${GPG_PRESET_PASSPHRASE:-/usr/lib/gnupg/gpg-preset-passphrase}}"
+
+        local op_args=(item get "$OP_ITEM" --fields "$OP_FIELD" --reveal)
+        [[ -n "${OP_ACCOUNT:-}" ]] && op_args+=(--account "$OP_ACCOUNT")
+
+        op "${op_args[@]}" | "$preset_bin" --preset "$OP_GPG_KEYGRIP"
     }
 
     gpg_cache
@@ -322,4 +334,9 @@ add-zsh-hook precmd dodo_check
 # Atuin: improved shell history (Nix/Home Manager install)
 if exists atuin; then
   eval "$(atuin init zsh)"
+fi
+
+# zoxide: smarter cd. Replaces cd with z when available.
+if exists zoxide; then
+  eval "$(zoxide init zsh --cmd cd)"
 fi
