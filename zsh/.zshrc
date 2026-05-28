@@ -337,6 +337,10 @@ if exists atuin; then
 fi
 
 # zoxide: smarter cd. Replaces cd with z when available.
+# _ZO_DOCTOR=0 silences false-positive warnings caused by editor shell
+# integrations (VSCode, Claude Code, etc.) injecting precmd hooks after
+# .zshrc finishes loading.
+export _ZO_DOCTOR=0
 if exists zoxide; then
   eval "$(zoxide init zsh --cmd cd)"
 fi
