@@ -78,9 +78,14 @@ if [[ -a $HOME/.zsh_op ]]; then
         # 1. Ensure the agent is running
         gpg-connect-agent /bye &> /dev/null
 
-        # 2. Check if the passphrase is already cached
-        # We query KEYINFO for the grip. The output contains flags; " P " indicates Present.
-        if gpg-connect-agent "KEYINFO $OP_GPG_KEYGRIP" /bye | grep -q " P "; then
+        # 2. Check if the passphrase is already cached.
+        # KEYINFO output: S KEYINFO <grip> <type> <serial> <idstr> <cached> <prot> ...
+        # Field 7 (cached) is "1" when cached, "-" otherwise. Field 8 (protection)
+        # is always "P" for passphrase-protected keys — do NOT match on " P ".
+        local keyinfo cached_flag
+        keyinfo=$(gpg-connect-agent "KEYINFO $OP_GPG_KEYGRIP" /bye 2>/dev/null | head -n1)
+        cached_flag=$(echo "$keyinfo" | awk '{print $7}')
+        if [[ "$cached_flag" == "1" ]]; then
             # Key is already cached. Exit function immediately.
             return 0
         fi
