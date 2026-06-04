@@ -1,0 +1,11 @@
+{
+  "workbench.startupEditor": "none",
+  "editor.fontSize": 12,
+  "debug.console.fontSize": 11,
+  "chat.editor.fontSize": 12,
+  "chat.fontSize": 11,
+  "terminal.integrated.fontSize": 11,
+  "settingsSync.ignoredExtensions": [
+    "denoland.vscode-deno"
+  ]
+}
