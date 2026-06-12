@@ -90,10 +90,16 @@ if [[ -a $HOME/.zsh_op ]]; then
             return 0
         fi
 
-        # 3. If not cached, fetch from 1Password via the desktop app integration.
-        # The CLI delegates auth to the unlocked desktop app — no prompt spawned.
-        # If the app is locked this will fail loudly rather than hang waiting for input.
-        echo "Initializing GPG key from 1Password..."
+        # 3. Give a brief window to skip the fetch (e.g. offline / app locked).
+        # Press ESC within the timeout to skip; any other key or timeout proceeds.
+        # -t bounds the wait so init never blocks indefinitely on input.
+        local skip_key
+        printf 'Initializing GPG key from 1Password... (ESC to skip) '
+        if read -s -k 1 -t 2 skip_key && [[ "$skip_key" == $'\e' ]]; then
+            echo "skipped."
+            return 0
+        fi
+        echo
 
         # Resolve gpg-preset-passphrase dynamically: works on NixOS (store paths),
         # distros (/usr/lib/gnupg), and anywhere gpgconf knows the libexecdir.
