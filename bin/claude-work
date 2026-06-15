@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Run the Claude Code CLI against the work account.
+# Login/session live in a dedicated CLAUDE_CONFIG_DIR so this never collides
+# with the personal account (see also: Zed agent "Claude (Work)").
+#
+# First run: `claude-work` then `/login` to authenticate.
+# Piping works as usual, e.g.:
+#   echo "summarize this" | claude-work -p
+#   git diff | claude-work -p "review these changes"
+export CLAUDE_CONFIG_DIR="$HOME/.claude-work"
+exec claude "$@"
