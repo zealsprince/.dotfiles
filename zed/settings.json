@@ -7,6 +7,34 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  // Two Claude accounts as separate ACP agents, each pinned to its own
+  // CLAUDE_CONFIG_DIR so logins/sessions don't collide. Run `/login` in each
+  // thread once to authenticate the matching account. Dirs are created by the
+  // Nix home activation (see .nixos/home.nix installZedConfig).
+  "agent_servers": {
+    "Claude (Personal)": {
+      "type": "custom",
+      "command": "npx",
+      "args": ["-y", "@zed-industries/claude-code-acp"],
+      "env": {
+        "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-personal",
+      },
+      "default_config_options": {
+        "mode": "dontAsk",
+      },
+    },
+    "Claude (Work)": {
+      "type": "custom",
+      "command": "npx",
+      "args": ["-y", "@zed-industries/claude-code-acp"],
+      "env": {
+        "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-work",
+      },
+      "default_config_options": {
+        "mode": "dontAsk",
+      },
+    },
+  },
   "edit_predictions": {
     "provider": "copilot",
   },
