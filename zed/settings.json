@@ -18,6 +18,7 @@
       "args": ["-y", "@zed-industries/claude-code-acp"],
       "env": {
         "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-personal",
+        "SSH_AUTH_SOCK": "/home/zealsprince/.1password/agent.sock",
       },
       "default_config_options": {
         "mode": "dontAsk",
@@ -29,6 +30,7 @@
       "args": ["-y", "@zed-industries/claude-code-acp"],
       "env": {
         "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-work",
+        "SSH_AUTH_SOCK": "/home/zealsprince/.1password/agent.sock",
       },
       "default_config_options": {
         "mode": "dontAsk",
