@@ -15,7 +15,7 @@
     "Claude (Personal)": {
       "type": "custom",
       "command": "npx",
-      "args": ["-y", "@zed-industries/claude-code-acp"],
+      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.45.0"],
       "env": {
         "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-personal",
         "SSH_AUTH_SOCK": "/home/zealsprince/.1password/agent.sock",
@@ -27,7 +27,7 @@
     "Claude (Work)": {
       "type": "custom",
       "command": "npx",
-      "args": ["-y", "@zed-industries/claude-code-acp"],
+      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.45.0"],
       "env": {
         "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-work",
         "SSH_AUTH_SOCK": "/home/zealsprince/.1password/agent.sock",
