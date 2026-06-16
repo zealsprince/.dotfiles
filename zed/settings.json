@@ -36,6 +36,18 @@
         "mode": "dontAsk",
       },
     },
+    "Claude (Vera)": {
+      "type": "custom",
+      "command": "npx",
+      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.45.0"],
+      "env": {
+        "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-vera",
+        "SSH_AUTH_SOCK": "/home/zealsprince/.1password/agent.sock",
+      },
+      "default_config_options": {
+        "mode": "dontAsk",
+      },
+    },
   },
   "edit_predictions": {
     "provider": "copilot",
