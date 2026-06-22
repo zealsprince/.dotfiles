@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # Run the Claude Code CLI against the work account.
-# Login/session live in a dedicated CLAUDE_CONFIG_DIR so this never collides
-# with the personal account (see also: Zed agent "Claude (Work)").
 #
-# First run: `claude-work` then `/login` to authenticate.
-# Piping works as usual, e.g.:
-#   echo "summarize this" | claude-work -p
-#   git diff | claude-work -p "review these changes"
-export CLAUDE_CONFIG_DIR="$HOME/.claude-work"
+# Work now lives in the DEFAULT config dir (~/.claude), the same one the bare
+# `claude` command and the VSCode extension use. So terminal, VSCode, and this
+# launcher all share one work login, trust, and skills state - no more drift
+# between them. This wrapper stays for muscle memory (and the Zed "Claude
+# (Work)" agent); it is just `claude` with no CLAUDE_CONFIG_DIR override.
+#
+# Personal and Vera keep their own dirs via claude-personal / claude-vera.
 exec claude "$@"
