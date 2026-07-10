@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Run the Claude Code CLI as Vera, the persona defined in ai.md/VERA.md.
 # Login/session live in a dedicated CLAUDE_CONFIG_DIR so this never collides with
 # the personal or work accounts. Unlike those, this profile imports the persona
 # as always-on context, so Vera is on from the first message, no /you needed.
