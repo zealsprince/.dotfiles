@@ -273,6 +273,9 @@ if exists vim; then
     export EDITOR='vim'
 fi
 
+# Default model for Claude Code and the Anthropic SDK.
+export ANTHROPIC_MODEL="claude-fable-5"
+
 # Replace default ls commands with eza's.
 if exists eza; then
     alias ls="eza --icons=always"
