@@ -42,6 +42,10 @@ fi
 
 
 
+# User-local binaries (claude, custom scripts). Must come before the vscode
+# early return below so its terminals get them too.
+export PATH=$HOME/.local/bin:$PATH
+
 # If you're working with Copilot or something else, you might want to just use vanilla zsh.
 if [ "$TERM_PROGRAM" = "vscode" ]; then
     return
@@ -321,8 +325,6 @@ fi
 # GitHub Copilot keybindings.
 bindkey '^[?' zsh_gh_copilot_suggest  # bind Alt+? to suggest
 bindkey '^[^?' zsh_gh_copilot_explain  # bind Ctrl+Alt+? to explain
-
-export PATH=$HOME/.local/bin:$PATH
 
 # Check if the dodo .dotfile exists. If so, get todos.
 function dodo_check() {
