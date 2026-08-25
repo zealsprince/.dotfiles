@@ -36,6 +36,12 @@ if exists anyenv; then
 fi
 
 # direnv (incl. nix-direnv): per-directory env loading
+# Zed hands new terminals its captured project env, direnv bookkeeping vars
+# included, so the hook thinks the env is already loaded and never fires.
+# Drop that state (and the log silencer) so each terminal loads fresh.
+if [ -n "$ZED_TERM" ] || [ "$TERM_PROGRAM" = "zed" ]; then
+  unset DIRENV_DIR DIRENV_FILE DIRENV_DIFF DIRENV_WATCHES DIRENV_LOG_FORMAT
+fi
 if exists direnv; then
   eval "$(direnv hook zsh)"
 fi
