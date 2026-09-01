@@ -15,7 +15,7 @@
     "Claude (Personal)": {
       "type": "custom",
       "command": "npx",
-      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.62.0"],
+      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.73.0"],
       "env": {
         "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-personal",
         "SSH_AUTH_SOCK": "/home/zealsprince/.1password/agent.sock",
@@ -29,7 +29,7 @@
       // the same one bare `claude` and VSCode use, so they never drift apart.
       "type": "custom",
       "command": "npx",
-      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.62.0"],
+      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.73.0"],
       "env": {
         "SSH_AUTH_SOCK": "/home/zealsprince/.1password/agent.sock",
       },
@@ -40,7 +40,7 @@
     "Claude (Vera)": {
       "type": "custom",
       "command": "npx",
-      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.62.0"],
+      "args": ["-y", "@agentclientprotocol/claude-agent-acp@0.73.0"],
       "env": {
         "CLAUDE_CONFIG_DIR": "/home/zealsprince/.claude-vera",
         "SSH_AUTH_SOCK": "/home/zealsprince/.1password/agent.sock",
