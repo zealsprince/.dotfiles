@@ -8,4 +8,7 @@
 # (Work)" agent); it is just `claude` with no CLAUDE_CONFIG_DIR override.
 #
 # Personal and Vera keep their own dirs via claude-personal / claude-vera.
-exec claude "$@"
+#
+# Goes through claude-wrapper.sh so typing `restart` inside the session exits
+# and resumes it in place (picks up new hooks, plugins, binary, and MCP state).
+exec "$HOME/.dotfiles/bin/claude-wrapper.sh" "$@"

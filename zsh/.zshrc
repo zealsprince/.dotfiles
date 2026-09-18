@@ -52,6 +52,14 @@ fi
 # early return below so its terminals get them too.
 export PATH=$HOME/.local/bin:$PATH
 
+# Bare `claude` goes through the claude-restart wrapper so typing `restart` in
+# a session exits and resumes it in place. The wrapper finds the real binary
+# via PATH, so this function doesn't recurse. The claude-* launchers exec the
+# wrapper themselves. See https://github.com/yacb2/claude-restart
+claude() {
+  "$HOME/.dotfiles/bin/claude-wrapper.sh" "$@"
+}
+
 # If you're working with Copilot or something else, you might want to just use vanilla zsh.
 if [ "$TERM_PROGRAM" = "vscode" ]; then
     return

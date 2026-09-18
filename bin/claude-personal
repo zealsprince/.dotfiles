@@ -8,4 +8,7 @@
 #   echo "summarize this" | claude-personal -p
 #   git diff | claude-personal -p "review these changes"
 export CLAUDE_CONFIG_DIR="$HOME/.claude-personal"
-exec claude "$@"
+
+# Goes through claude-wrapper.sh so typing `restart` inside the session exits
+# and resumes it in place.
+exec "$HOME/.dotfiles/bin/claude-wrapper.sh" "$@"
