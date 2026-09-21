@@ -24,3 +24,10 @@ After running setup:
 
 - start tmux
 - press `prefix` + `I` (capital i) to install plugins via TPM
+
+## Nix machines ##
+
+Home Manager links the conf and writes `~/.tmux/nix-plugins.conf` with the same
+plugin list built from nixpkgs, so there is no TPM and no `prefix` + `I` step.
+That list lives in `home.nix` in the `.nixos` repo and has to stay in step with
+the `set -g @plugin` lines here.
