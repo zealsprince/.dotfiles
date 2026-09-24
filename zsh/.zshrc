@@ -292,7 +292,7 @@ if exists vim; then
 fi
 
 # Default model for Claude Code and the Anthropic SDK.
-export ANTHROPIC_MODEL="claude-fable-5"
+export ANTHROPIC_MODEL="claude-opus-5-5"
 
 # Replace default ls commands with eza's.
 if exists eza; then
